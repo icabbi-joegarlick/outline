@@ -12,12 +12,14 @@ RUN yarn --pure-lockfile
 
 COPY . .
 
+
 RUN yarn build && \
   yarn --production --ignore-scripts --prefer-offline && \
   rm -rf shared && \
   rm -rf app
 
 ENV NODE_ENV production
-CMD yarn start
+
+ENTRYPOINT ["sh", "entrypoint.sh"]
 
 EXPOSE 3000
